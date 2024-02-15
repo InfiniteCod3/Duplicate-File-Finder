@@ -144,3 +144,16 @@ func compareFiles(path1, path2 string) bool {
 		}
 	}
 } 
+	// First, let's measure the tails. If they're not the same length, no need to sniff further!
+	info1, err := os.Stat(path1)
+	if err != nil {
+	    return false
+	}
+	info2, err := os.Stat(path2)
+	if err != nil {
+	    return false
+	}
+	if info1.Size() != info2.Size() {
+	    return false // Different sizes? Definitely not twins!
+	}
+	// Comparing the fur patterns... only the truly identical will pass this test!
