@@ -36,8 +36,8 @@ Place the executable in your desired location.
 Usage
 Basic Usage:
 
-main.exe <<filepath>>
-Replace <<filepath>> with the actual path to the directory you want to scan for duplicates.
+main.exe (Path to folder)
+Replace (Path to folder) with the actual path to the directory you want to scan for duplicates.
 
 Example:
 ```bash
