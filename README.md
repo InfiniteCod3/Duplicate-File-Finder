@@ -1,4 +1,4 @@
-![image](https://github.com/lilsheepyy/Duplicate-File-Finder/assets/128471020/a0e8a6ca-a5ea-41c0-8ee2-c61aa8310f66)# Duplicate-File-Finder
+# Duplicate-File-Finder
 
 A command-line utility for identifying and managing duplicate files.
 
