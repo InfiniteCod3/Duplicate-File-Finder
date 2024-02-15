@@ -51,6 +51,6 @@ The utility will print a list of any discovered duplicate file groups, indicatin
 ## Contributing
 Contributions to improve Duplicate-File-Finder are welcome! Please follow these guidelines:
 
-Fork this repository.
-Create a branch for your changes.
-Submit a pull request with a detailed description of your contributions.
+* Fork this repository.
+* Create a branch for your changes.
+* Submit a pull request with a detailed description of your contributions.
