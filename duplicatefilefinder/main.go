@@ -34,8 +34,8 @@ func main() {
 
 	var wg sync.WaitGroup // Organizing our fluffy investigators
 
-	// Unleashing the worker kitties!
-	const numWorkers = 5
+	// Adjusting the number of whiskers in the hunt for efficiency...
+	var numWorkers = runtime.NumCPU() // More paws for more power!
 	for i := 0; i < numWorkers; i++ {
 		wg.Add(1)
 		go func() {
@@ -110,7 +110,7 @@ func processFile(path string, resultsChan chan<- FileData) error {
 	resultsChan <- FileData{Path: path, Hash: hash.Sum(nil)} // Sharing the findings!
 	return nil
 }
-
+			fmt.Println("\tThese files might be purrfect duplicates. Time for a catnap while you decide what to do with them!")
 // compareFiles: When kitties need to double-check those scents
 // They don't get fooled easily!
 func compareFiles(path1, path2 string) bool {
@@ -144,3 +144,16 @@ func compareFiles(path1, path2 string) bool {
 		}
 	}
 } 
+	// First, let's measure the tails. If they're not the same length, no need to sniff further!
+	info1, err := os.Stat(path1)
+	if err != nil {
+	    return false
+	}
+	info2, err := os.Stat(path2)
+	if err != nil {
+	    return false
+	}
+	if info1.Size() != info2.Size() {
+	    return false // Different sizes? Definitely not twins!
+	}
+	// Comparing the fur patterns... only the truly identical will pass this test!
