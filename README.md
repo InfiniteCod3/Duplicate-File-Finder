@@ -37,6 +37,7 @@ Usage
 Basic Usage:
 
 main.exe (Path to folder)
+
 Replace (Path to folder) with the actual path to the directory you want to scan for duplicates.
 
 Example:
