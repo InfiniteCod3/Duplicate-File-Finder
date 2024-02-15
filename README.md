@@ -31,7 +31,7 @@ go run main.go
 ```
 Option 2: Using the Compiled Executable
 
-Download the pre-compiled executable (main.exe for Windows) the [Releases]([https://go.dev/doc/install](https://github.com/lilsheepyy/Duplicate-File-Finder/releases/tag/Executable) section of this repository.
+Download the pre-compiled executable (main.exe for Windows) the [Releases](https://github.com/lilsheepyy/Duplicate-File-Finder/releases/tag/Executable) section of this repository.
 Place the executable in your desired location.
 Usage
 Basic Usage:
