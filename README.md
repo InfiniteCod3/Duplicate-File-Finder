@@ -6,9 +6,9 @@ A command-line utility for identifying and managing duplicate files.
 Duplicate-File-Finder is a utility designed to help you declutter your storage by efficiently finding and organizing duplicate files. It utilizes robust MD5 hashing for accurate comparisons, ensuring that duplicates are reliably detected.
 
 ## Features
-Efficient MD5 Hashing: Employs the well-established MD5 algorithm to create unique fingerprints of files, guaranteeing accurate duplicate detection.
-Flexible Usage: Can be run directly with Go or used as a standalone executable, providing options for different workflows.
-Clear Output: Presents discovered duplicates in an organized and informative manner, enabling easy review and decision-making.
+* Efficient MD5 Hashing: Employs the well-established MD5 algorithm to create unique fingerprints of files, guaranteeing accurate duplicate detection.
+*Flexible Usage: Can be run directly with Go or used as a standalone executable, providing options for different workflows.
+* Clear Output: Presents discovered duplicates in an organized and informative manner, enabling easy review and decision-making.
 
 ## Installation & Prerequisites
 
