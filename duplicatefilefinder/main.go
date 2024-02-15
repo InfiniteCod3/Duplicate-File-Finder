@@ -110,7 +110,7 @@ func processFile(path string, resultsChan chan<- FileData) error {
 	resultsChan <- FileData{Path: path, Hash: hash.Sum(nil)} // Sharing the findings!
 	return nil
 }
-
+			fmt.Println("\tThese files might be purrfect duplicates. Time for a catnap while you decide what to do with them!")
 // compareFiles: When kitties need to double-check those scents
 // They don't get fooled easily!
 func compareFiles(path1, path2 string) bool {
