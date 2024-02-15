@@ -36,8 +36,8 @@ Place the executable in your desired location.
 Usage
 Basic Usage:
 
-main.exe <filepath>
-Replace <filepath> with the actual path to the directory you want to scan for duplicates.
+main.exe <<filepath>>
+Replace <<filepath>> with the actual path to the directory you want to scan for duplicates.
 
 Example:
 ```bash
@@ -50,6 +50,6 @@ The utility will print a list of any discovered duplicate file groups, indicatin
 ## Contributing
 Contributions to improve Duplicate-File-Finder are welcome! Please follow these guidelines:
 
-* Fork this repository.
-* Create a branch for your changes.
-* Submit a pull request with a detailed description of your contributions.
+Fork this repository.
+Create a branch for your changes.
+Submit a pull request with a detailed description of your contributions.
