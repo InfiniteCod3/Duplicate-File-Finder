@@ -33,7 +33,7 @@ Example:
 main.exe C:\Users\ExampleUser\Documents
 ```
 
-##Output
+## Output
 The utility will print a list of any discovered duplicate file groups, indicating the file paths within each group.
 
 ## Contributing
