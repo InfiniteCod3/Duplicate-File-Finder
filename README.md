@@ -16,7 +16,7 @@ Duplicate-File-Finder is a utility designed to help you declutter your storage b
 Golang (if you plan to run the source code directly)
 Option 1: Running from Source
 
-Clone this repository: git clone https://github.com/yourusername/Duplicate-File-Finder.git
+Clone this repository: git clone https://github.com/lilsheepyy/Duplicate-File-Finder.git
 Navigate to the project directory: cd Duplicate-File-Finder
 Run the application: go run main.go
 Option 2: Using the Compiled Executable
