@@ -34,8 +34,8 @@ func main() {
 
 	var wg sync.WaitGroup // Organizing our fluffy investigators
 
-	// Unleashing the worker kitties!
-	const numWorkers = 5
+	// Adjusting the number of whiskers in the hunt for efficiency...
+	var numWorkers = runtime.NumCPU() // More paws for more power!
 	for i := 0; i < numWorkers; i++ {
 		wg.Add(1)
 		go func() {
