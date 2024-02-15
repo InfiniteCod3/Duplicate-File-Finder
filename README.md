@@ -1,4 +1,4 @@
-# Duplicate-File-Finder
+![image](https://github.com/lilsheepyy/Duplicate-File-Finder/assets/128471020/a0e8a6ca-a5ea-41c0-8ee2-c61aa8310f66)# Duplicate-File-Finder
 
 A command-line utility for identifying and managing duplicate files.
 
@@ -9,6 +9,7 @@ Duplicate-File-Finder is a utility designed to help you declutter your storage b
 * Efficient MD5 Hashing: Employs the well-established MD5 algorithm to create unique fingerprints of files, guaranteeing accurate duplicate detection.
 * Flexible Usage: Can be run directly with Go or used as a standalone executable, providing options for different workflows.
 * Clear Output: Presents discovered duplicates in an organized and informative manner, enabling easy review and decision-making.
+* Silly anotations and output.
 
 ## Installation & Prerequisites
 
