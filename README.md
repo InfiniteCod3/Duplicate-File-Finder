@@ -26,6 +26,7 @@ Golang (if you plan to run the source code directly)
   - [Duplicate File Finder](#duplicate-file-finder-2)
   - [Large File Finder](#large-file-finder-2)
 - [Contributing](#contributing)
+  
 Option 1: Running from Source
 
 Clone this repository: 
