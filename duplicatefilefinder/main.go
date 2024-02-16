@@ -2,121 +2,114 @@ package main
 
 import (
 	"bufio"
+	"bytes"
 	"crypto/md5"
 	"encoding/hex"
 	"fmt"
 	"io"
 	"os"
 	"path/filepath"
+	"runtime"
 	"sync"
-	"bytes"
 )
 
-// FileData: A precious little data morsel for our curious cats
+// FileData: A tasty morsel of file information
 type FileData struct {
 	Path string
-	Hash []byte // A unique pawprint for each file
+	Hash []byte
 }
 
-// main: Where the kitty magic begins...
 func main() {
 	if len(os.Args) != 2 {
-		fmt.Printf("Usage: %s <directory>\n", os.Args[0])
-		fmt.Println("Hiss! Use the right paw-wer next time, human!") // A gentle scolding
-		os.Exit(1) 
+		fmt.Printf("Meow! Usage: %s <directory>\n", os.Args[0])
+		os.Exit(1) // Hiss! Wrong way to call this kitty program
 	}
 
 	dir := os.Args[1]
 
-	// Channels for kitty communication
-	fileChan := make(chan string, 100)    // Paths for hungry kitties
-	resultsChan := make(chan FileData, 100) // Yummy morsels with hashes
+	fileChan := make(chan string, 100) // A magical yarn ball to chase files
+	resultsChan := make(chan FileData, 100)
 
-	var wg sync.WaitGroup // Organizing our fluffy investigators
-
-	// Adjusting the number of whiskers in the hunt for efficiency...
-	var numWorkers = runtime.NumCPU() // More paws for more power!
+	var wg sync.WaitGroup // Keeping track of all my busy paws
+	var numWorkers = runtime.NumCPU()
 	for i := 0; i < numWorkers; i++ {
 		wg.Add(1)
 		go func() {
 			defer wg.Done()
 			for path := range fileChan {
 				if err := processFile(path, resultsChan); err != nil {
-					fmt.Fprintf(os.Stderr, "Mew! Trouble sniffing %s: %v\n", path, err)
+					fmt.Fprintf(os.Stderr, "Furball! Can't play with %s: %v\n", path, err)
 				}
 			}
 		}()
 	}
 
-	// A curious kitty exploring
+	// **Exploring territory!**
 	go func() {
 		_ = filepath.Walk(dir, func(path string, info os.FileInfo, err error) error {
 			if err != nil {
-				return err // Whiskers twitching... a troublesome path
+				return err // Uh-oh, stumbled on a prickly bush!
 			}
-			if !info.IsDir() && info.Mode().IsRegular() { // Regular files only, please!
-				fileChan <- path
+			if !info.IsDir() && info.Mode().IsRegular() {
+				fileChan <- path // Found a potential toy!
 			}
 			return nil
 		})
-		close(fileChan) // No more file snacks - let's digest
+		close(fileChan)
 	}()
 
-	// Time to gather the kitty crew when the snacks are all eaten
+	// **Waiting for the hunt to be over**
 	go func() {
 		wg.Wait()
 		close(resultsChan)
 	}()
 
-	// Building the scent map... each hash a unique scent marking territory
+	// **Sorting through the treasures**
 	fileMap := make(map[string][]string)
 	for res := range resultsChan {
-		hashString := hex.EncodeToString(res.Hash)
+		hashString := hex.EncodeToString(res.Hash) // Turning scent into readable marks
 		fileMap[hashString] = append(fileMap[hashString], res.Path)
 	}
 
-	// Pouncing on those copycats!
+	// **Did I find any doubles?**
 	for hash, paths := range fileMap {
 		if len(paths) > 1 {
-			fmt.Printf("Duplicate files with hash %s:\n", hash)
-			fmt.Println("\tPurr... found some potential copycats!") // Playful discovery
+			fmt.Printf("Paws up! Duplicate scents with hash %s:\n", hash)
 			for _, path := range paths {
 				fmt.Println("\t" + path)
 			}
 
-			// Checking our scent marks extra carefully in case of mischief
-			if !compareFiles(paths[0], paths[1]) {
-				fmt.Println("Warning: Hash collision detected! Might be mischievous copycats!")
+			if !compareFiles(paths[0], paths[1]) { // Extra cautious kitty check
+				fmt.Println("Warning: My whiskers are tingling! Possible mix-up!")
 			}
 		}
 	}
 }
 
-// processFile: A meticulous kitty inspecting a file
+// processFile: The hunter who sniffs out file secrets
 func processFile(path string, resultsChan chan<- FileData) error {
 	file, err := os.Open(path)
 	if err != nil {
-		return err
+		return err // Oops, couldn't get my paws on that file!
 	}
-	defer file.Close() // Gently close when sniffing is done
+	defer file.Close()
 
-	hash := md5.New() // Our kitty's super powerful nose
-	reader := bufio.NewReader(file) // For efficient nibbles of data
+	hash := md5.New() // My super-sensitive nose for catnip... I mean, data
+	reader := bufio.NewReader(file)
 
 	if _, err := io.Copy(hash, reader); err != nil {
-		return err
+		return err // Hmmm, this doesn't smell right...
 	}
 
-	resultsChan <- FileData{Path: path, Hash: hash.Sum(nil)} // Sharing the findings!
+	resultsChan <- FileData{Path: path, Hash: hash.Sum(nil)} // Sharing the catch!
 	return nil
 }
-			fmt.Println("\tThese files might be purrfect duplicates. Time for a catnap while you decide what to do with them!")
-// compareFiles: When kitties need to double-check those scents
-// They don't get fooled easily!
+
+// compareFiles: Checking if my toys are *really* the same
 func compareFiles(path1, path2 string) bool {
 	file1, err1 := os.Open(path1)
 	if err1 != nil {
-		return false // Can't open? Assume they're different
+		return false // Can't open up those toys for comparison!
 	}
 	defer file1.Close()
 
@@ -126,8 +119,7 @@ func compareFiles(path1, path2 string) bool {
 	}
 	defer file2.Close()
 
-	// Efficient comparison using buffers
-	const bufferSize = 64 * 1024 // 64KB
+	const bufferSize = 64 * 1024 // Playtime has to be efficient!
 	buffer1 := make([]byte, bufferSize)
 	buffer2 := make([]byte, bufferSize)
 
@@ -135,25 +127,12 @@ func compareFiles(path1, path2 string) bool {
 		n1, err1 := file1.Read(buffer1)
 		n2, err2 := file2.Read(buffer2)
 
-		if err1 != err2 || !bytes.Equal(buffer1[:n1], buffer2[:n2]) {
-			return false // Mismatch found
+		if err1 != err2 || n1 != n2 || !bytes.Equal(buffer1[:n1], buffer2[:n2]) {
+			return false // Hmm, these feel different...
 		}
 
-		if err1 == io.EOF && err2 == io.EOF {
-			return true // Files are identical
+		if err1 == io.EOF {
+			return true // They match! Time for treats!
 		}
 	}
-} 
-	// First, let's measure the tails. If they're not the same length, no need to sniff further!
-	info1, err := os.Stat(path1)
-	if err != nil {
-	    return false
-	}
-	info2, err := os.Stat(path2)
-	if err != nil {
-	    return false
-	}
-	if info1.Size() != info2.Size() {
-	    return false // Different sizes? Definitely not twins!
-	}
-	// Comparing the fur patterns... only the truly identical will pass this test!
+}
